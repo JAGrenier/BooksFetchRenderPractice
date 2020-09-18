@@ -1,6 +1,4 @@
 const BOOKS_URL = 'http://localhost:3000/books'
-//stuff to load when page loads
-// window.addEventListener('load', getBooks)
 
 function getBooks (){
     fetch(BOOKS_URL)
@@ -23,6 +21,7 @@ function displayBooks (books){
         genre.textContent = book.genre 
         image.src = 'https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png'
         deleteButton.textContent = 'Delete Book'
+        deleteButton.classList.add('delete')
 
         card.append(title, genre, image, deleteButton)
         list.appendChild(card)

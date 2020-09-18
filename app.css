@@ -2,7 +2,7 @@
     display: flex; 
     flex-direction: column;
     align-items: center;
-    background-color: blanchedalmond;
+    background-color: lightslategray;
     width: 250px;
     margin: 5px;
     padding: 10px;
@@ -10,20 +10,21 @@
 }
 
 img{
-    width: 50%;
+    width: 200px;
 }
-/* 
-body {
-        display: grid;
-        grid-template-columns: 300px 300px 300px 300px;
-        justify-content: center;
-        align-items: center;
-} */
 
-/* #book-container{
-    display: grid;
-    display: grid;
-    grid-template-columns: 300px 300px 300px 300px;
+#books {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-} */
+}
+
+h1, h2, form{
+    display: flex;
+    justify-content: center;
+}
+
+.delete {
+    background-color: lightsteelblue;
+    color: maroon;
+}
