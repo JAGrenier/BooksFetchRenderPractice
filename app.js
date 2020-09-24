@@ -1,37 +1,36 @@
-const BOOKS_URL = 'http://localhost:3000/books'
-
+const BOOKSURL = 'http://localhost:3000/books'
+const list = document.querySelector('#books')
 function getBooks (){
-    fetch(BOOKS_URL)
+    fetch(BOOKSURL)
     .then(response => response.json())
     .then(displayBooks)
 }
 
 function displayBooks (books){
-    const list = document.querySelector('#books')
-
-    books.forEach(book => {
-        const card = document.createElement('div')
+    books.forEach(displayBook)
+}
+function displayBook(book){
+        const bookCard = document.createElement('div')
         const title = document.createElement('p')
         const genre = document.createElement('p')
         const image = document.createElement('img')
         const deleteButton = document.createElement('button')
 
-        card.className = 'card'
+        bookCard.classList = 'card'
         title.textContent = book.title
         genre.textContent = book.genre 
         image.src = 'https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png'
         deleteButton.textContent = 'Delete Book'
         deleteButton.classList.add('delete')
 
-        card.append(title, genre, image, deleteButton)
-        list.appendChild(card)
+        bookCard.append(title, genre, image, deleteButton)
+        list.appendChild(bookCard)
 
-        deleteButton.addEventListener('click', () => deleteBook(book))
+        deleteButton.addEventListener('click', () => {
+            bookCard.remove()
+            deleteBook(book)
     })
-
 }
-
-
 const form = document.querySelector('form')
 
 form.addEventListener('submit', createBook)
@@ -44,7 +43,7 @@ function createBook(event){
     const title = formData.get('title')
     const genre = formData.get('genre')
 
-    fetch(BOOKS_URL,{
+    fetch(BOOKSURL,{
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -56,8 +55,6 @@ function createBook(event){
 }
 
 function deleteBook(book){
-    fetch(`${BOOKS_URL}/${book.id}`,{
-        method: 'DELETE'
-    }) .then(response => response.json())
-        .then(console.log)
-}
+    console.log(book.id)
+    fetch(`${BOOKSURL}/${book.id}`,{method: 'DELETE'})
+    }
