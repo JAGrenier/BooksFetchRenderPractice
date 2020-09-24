@@ -1,10 +1,10 @@
 const BOOKSURL = 'http://localhost:3000/books'
 const list = document.querySelector('#books')
-function getBooks (){
-    fetch(BOOKSURL)
+
+fetch(BOOKSURL)
     .then(response => response.json())
     .then(displayBooks)
-}
+
 
 function displayBooks (books){
     books.forEach(displayBook)
@@ -21,7 +21,7 @@ function displayBook(book){
         genre.textContent = book.genre 
         image.src = 'https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png'
         deleteButton.textContent = 'Delete Book'
-        deleteButton.classList.add('delete')
+        deleteButton.classList = 'delete'
 
         bookCard.append(title, genre, image, deleteButton)
         list.appendChild(bookCard)
@@ -33,16 +33,19 @@ function displayBook(book){
 }
 const form = document.querySelector('form')
 
-form.addEventListener('submit', createBook)
-getBooks()
+form.addEventListener('submit', showBook)
 
-function createBook(event){
+
+function showBook(event){
     event.preventDefault()
-
+    
     const formData = new FormData(event.target)
     const title = formData.get('title')
     const genre = formData.get('genre')
+    const book = {title, genre}
 
+    displayBook(book)
+    form.reset()
     fetch(BOOKSURL,{
         method: 'POST',
         headers: {
@@ -56,5 +59,5 @@ function createBook(event){
 
 function deleteBook(book){
     console.log(book.id)
-    fetch(`${BOOKSURL}/${book.id}`,{method: 'DELETE'})
+    fetch(`http://localhost:3000/books/${book.id}`,{method: 'DELETE'})
     }
